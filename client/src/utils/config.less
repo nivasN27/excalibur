@@ -1,0 +1,64 @@
+/*-------------------
+Fonts
+--------------------*/
+
+@primaryFontName          : 'Montserrat';
+@secondaryFontName          : 'Amatic SC';
+
+@black             :#1E1E1E;
+@black2            :#000000;
+@bold              : bold;
+@normal            : normal;
+
+/*-------------------
+      Base Sizes 
+--------------------*/
+
+/* This is the single variable that controls them all */
+@emSize   : 14px;
+
+/* The size of page text  */
+@largeSize   : 16px; //This Variable only need config.less
+@fontSize    : 14px;
+@smallSize   : 12px; //This Variable only need config.less
+
+/*-------------------
+    Brand Colors
+--------------------*/
+@primaryColor        : #F2AA4CFF;
+@primaryColorLight   : #F3CA94;
+@secondaryColor      : #101820FF;
+@whiteColor          : #FFFFFF;
+@grayLight1          : #969696;
+@grayLight2          : #D9D9D9;
+@grayLight3          : #F5F5F5;
+@grayLight4          : #F9D5BC;
+@blueVariant         : #20A0D3;
+@redVariant2         : #FFD2D0;
+
+
+
+/*-------------------
+     Breakpoints
+--------------------*/
+
+@mobileBreakpoint            : 320px;
+@tabletBreakpoint            : 768px;
+@computerBreakpoint          : 992px;
+@largeMonitorBreakpoint      : 1200px;
+@widescreenMonitorBreakpoint : 1920px;
+
+/* Responsive */
+@largestMobileScreen : (@tabletBreakpoint - 1px);
+@largestTabletScreen : (@computerBreakpoint - 1px);
+@largestSmallMonitor : (@largeMonitorBreakpoint - 1px);
+@largestLargeMonitor : (@widescreenMonitorBreakpoint - 1px);
+
+
+@mediumScreen     : ~"only screen and (max-width: @{largestSmallMonitor})";
+@bigTabletScreen  : ~"only screen and (max-width: @{largestTabletScreen})";
+@tabletScreen     : ~"only screen and (max-width: @{largestMobileScreen})";
+@mobileScreen     : ~"only screen and (max-width: 575px)";
+
+@boxshadowcolor1 : rgba(201, 201, 201, 0.2);
+@boxshadowcolor2 : rgba(212, 212, 212, 0.19);
