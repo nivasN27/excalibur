@@ -7,6 +7,7 @@ import moon from "../assets/images/notes/moon.webp";
 import edit from "../assets/images/notes/editIcon.webp";
 import style from "./less/notes.module.less";
 import BgImg from "../components/BackgroundImage";
+import GlobalService from "../utils/globalService";
 
 const Notes = () => {
   const [open, setOpen] = useState(false);
@@ -21,6 +22,14 @@ const Notes = () => {
       setNoteList(storedNotes);
     }
   }, []);
+
+  useEffect(() => {
+    GlobalService.apiHit(
+      (data)=>{
+        console.log(data);
+      }, '/notes',{id:1},
+    )
+  })
 
   const handleAdd = (note) => {
     setOpen(false);

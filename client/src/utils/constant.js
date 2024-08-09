@@ -1,0 +1,13 @@
+export const protocol = "http";
+export const domain = "localhost";
+export const port = "9999";
+export const reactdomain = "pro.freckled.ai";
+export const reactport = "";
+export const reactcontext = "";
+export const apicontext = "";
+// export const appurl = "https://app.freckled.ai";
+// export const prourl = "https://apipro.freckled.ai";
+export const contactNumber = "+91 9655115013";
+export const contactMail = "nivashnadha27@gmail.com";
+export const restbaseurl = `${protocol}://${domain}:${port}`;
+export const reacturl = `${protocol}://${reactdomain}:${reactport}${reactcontext}`;
