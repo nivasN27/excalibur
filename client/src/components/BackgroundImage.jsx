@@ -5,7 +5,6 @@ export default function BgImg({ theme }) {
         <svg
           width="100vw"
           height="100vh"
-          viewBox="0 0 100vw 100vh"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >

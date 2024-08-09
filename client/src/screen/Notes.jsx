@@ -12,24 +12,24 @@ import GlobalService from "../utils/globalService";
 const Notes = () => {
   const [open, setOpen] = useState(false);
   const [noteList, setNoteList] = useState([]);
-  const [note, setNote] = useState({ id: 0, data: "", imgList: [] });
+  const [note, setNote] = useState({ id: 0, data: "", imageList: [] });
   const [type, setType] = useState("add");
   const [theme, setTheme] = useState("light");
 
-  useEffect(() => {
-    const storedNotes = JSON.parse(localStorage.getItem("notes"));
-    if (storedNotes) {
-      setNoteList(storedNotes);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const storedNotes = JSON.parse(localStorage.getItem("notes"));
+  //   if (storedNotes) {
+  //     setNoteList(storedNotes);
+  //   }
+  // }, []);
 
   useEffect(() => {
     GlobalService.apiHit(
       (data)=>{
-        console.log(data);
+        setNoteList(data.data)
       }, '/notes',{id:1},
     )
-  })
+  }, [])
 
   const handleAdd = (note) => {
     setOpen(false);
@@ -68,16 +68,16 @@ const Notes = () => {
           setNote(obj);
         }}
       >
-        {obj?.data?.startsWith("http") || obj?.data?.trim().endsWith(".com") ? (
-          <a href={obj.data} target="_blank">
-            {obj?.data}
+        {obj?.content?.startsWith("http") || obj?.content?.trim().endsWith(".com") ? (
+          <a href={obj.content} target="_blank">
+            {obj?.content}
           </a>
         ) : (
-          <p>{obj?.data}</p>
+          <p>{obj?.content}</p>
         )}
         <div className={style.imgContainer}>
-          {obj?.imgList?.length > 0 &&
-            obj.imgList.map((ele, idx) => <img src={ele} key={`img${idx}`} />)}
+          {obj?.imageList?.length > 0 &&
+            obj.imageList.split(',').map((ele, idx) => <img src={ele} key={`img${idx}`} />)}
         </div>
       </div>
     );
@@ -94,7 +94,7 @@ const Notes = () => {
           onClick={() => {
             setOpen(true);
             setType("add");
-            setNote({ id: 0, data: "", imgList: [] });
+            setNote({ id: 0, data: "", imageList: [] });
           }}
           className={style.plusIcon}
         />
