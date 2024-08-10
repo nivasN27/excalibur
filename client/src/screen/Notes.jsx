@@ -8,6 +8,7 @@ import edit from "../assets/images/notes/editIcon.webp";
 import style from "./less/notes.module.less";
 import BgImg from "../components/BackgroundImage";
 import GlobalService from "../utils/globalService";
+import axios from "axios";
 
 const Notes = () => {
   const [open, setOpen] = useState(false);
@@ -24,20 +25,36 @@ const Notes = () => {
   // }, []);
 
   useEffect(() => {
-    GlobalService.apiHit(
-      (data)=>{
-        setNoteList(data.data)
-      }, '/notes',{id:1},
-    )
-  }, [])
+    GlobalService.apiHit((data) => {
+      setNoteList(data.data);
+    }, "/notes");
+  }, []);
 
   const handleAdd = (note) => {
     setOpen(false);
-    let updatedNotes;
-    const id = noteList.length === 0 ? 1 : noteList[noteList.length - 1].id + 1;
-    updatedNotes = [...noteList, { ...note, id }];
-    localStorage.setItem("notes", JSON.stringify(updatedNotes));
-    setNoteList(updatedNotes);
+    const obj = { 
+      content: note.data,
+      imageList: note.imageList
+    };
+    const formData = new FormData();
+    formData.append("content", note.data)
+    // formData.append("imageList", note.imageList)
+    note.imageList.forEach((element) => {
+      formData.append("uploadfile", element);
+    });
+    GlobalService.apiHit(
+      (data) => {
+        console.log(data)
+        if(data.status === 'added') {
+          const updatedObj = {
+            ...obj,
+            id: data.id,
+          };
+          setNoteList(prev => [...prev, updatedObj])
+        }
+      },
+      "/add", formData, "post"
+    );
   };
 
   const handleEdit = (note) => {
@@ -68,7 +85,8 @@ const Notes = () => {
           setNote(obj);
         }}
       >
-        {obj?.content?.startsWith("http") || obj?.content?.trim().endsWith(".com") ? (
+        {obj?.content?.startsWith("http") ||
+        obj?.content?.trim().endsWith(".com") ? (
           <a href={obj.content} target="_blank">
             {obj?.content}
           </a>
@@ -77,7 +95,7 @@ const Notes = () => {
         )}
         <div className={style.imgContainer}>
           {obj?.imageList?.length > 0 &&
-            obj.imageList.split(',').map((ele, idx) => <img src={ele} key={`img${idx}`} />)}
+            obj.imageList.map((ele, idx) => <img src={ele} key={`img${idx}`} />)}
         </div>
       </div>
     );
@@ -105,6 +123,7 @@ const Notes = () => {
             className={style.themeChanger}
           />
         </div>
+        {console.log(noteList)}
         <div className={style.noteListContainer}>
           {noteList.map((obj, index) => (
             <div key={index} className={style.note}>
