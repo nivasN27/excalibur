@@ -3,7 +3,8 @@ import path from 'path';
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, '/home/amphisoft/Pictures/notes'); 
+        cb(null, 'D:/pro/notesStorage'); 
+        // cb(null, '/home/amphisoft/Pictures/notes'); 
     },
     filename: function (req, file, cb) {
         cb(null, Date.now() + path.extname(file.originalname)); 

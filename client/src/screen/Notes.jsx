@@ -1,51 +1,46 @@
 import { useEffect, useState } from "react";
-import NotesModal from "../components/NotesModal";
+import NotesModal from "../components/notes/NotesModal";
 import plusIcon from "../assets/images/notes/plusIcon.webp";
 import deleteIcon from "../assets/images/notes/deleteIcon.webp";
 import sun from "../assets/images/notes/sun.webp";
 import moon from "../assets/images/notes/moon.webp";
 import edit from "../assets/images/notes/editIcon.webp";
 import style from "./less/notes.module.less";
-import BgImg from "../components/BackgroundImage";
-import GlobalService from "../utils/globalService";
-import axios from "axios";
+import BgImg from "../components/notes/BackgroundImage";
+import GlobalService from "../utils/globalService.jsx";
+import DefaultLoader from "../components/DefaultLoader.jsx";
 
 const Notes = () => {
   const [open, setOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true)
   const [noteList, setNoteList] = useState([]);
-  const [note, setNote] = useState({ id: 0, data: "", imageList: [] });
+  const [note, setNote] = useState({ id: 0, content: "" });
   const [type, setType] = useState("add");
-  const [theme, setTheme] = useState("light");
-
-  // useEffect(() => {
-  //   const storedNotes = JSON.parse(localStorage.getItem("notes"));
-  //   if (storedNotes) {
-  //     setNoteList(storedNotes);
-  //   }
-  // }, []);
+  const [theme, setTheme] = useState("dark");
 
   useEffect(() => {
-    GlobalService.apiHit((data) => {
-      setNoteList(data.data);
-    }, "/notes");
+    handleGetNotes();
   }, []);
+  
+  const handleGetNotes = () => {
+    GlobalService.apiInstance((data) => {
+      if(data.status) {
+        setNoteList(data.data);
+        setIsLoading(false)
+      }
+    }, "/notes");
+  }
 
   const handleAdd = (note) => {
     setOpen(false);
     const obj = { 
-      content: note.data,
-      imageList: note.imageList
+      content: note.content
     };
-    const formData = new FormData();
-    formData.append("content", note.data)
-    // formData.append("imageList", note.imageList)
-    note.imageList.forEach((element) => {
-      formData.append("uploadfile", element);
-    });
-    GlobalService.apiHit(
+    console.log(note.content)
+    GlobalService.apiInstance(
       (data) => {
         console.log(data)
-        if(data.status === 'added') {
+        if(data.status && data.message === "success") {
           const updatedObj = {
             ...obj,
             id: data.id,
@@ -53,27 +48,34 @@ const Notes = () => {
           setNoteList(prev => [...prev, updatedObj])
         }
       },
-      "/add", formData, "post"
+      "/add", obj, "post"
     );
   };
 
   const handleEdit = (note) => {
     setOpen(false);
-    const updatedNotes = noteList.map((ele) => {
-      if (ele.id === note.id) {
-        return note;
-      }
-      return ele;
-    });
-    localStorage.setItem("notes", JSON.stringify(updatedNotes));
-    setNoteList(updatedNotes);
-  };
-
+    const obj = {
+      content: note.content,
+      id: note.id
+    };
+    GlobalService.apiInstance(
+      (data) => {
+        console.log(data);
+        handleGetNotes()
+      }, '/edit', obj, "PUT"
+    )
+  }
   const handleDelete = (id) => {
-    const updatedNotes = noteList.filter((ele) => ele.id !== id);
-    localStorage.setItem("notes", JSON.stringify(updatedNotes));
-    setNoteList(updatedNotes);
-  };
+    const obj = {
+      id
+    };
+    GlobalService.apiInstance(
+      (data) => {
+        console.log(data);
+        handleGetNotes()
+      }, '/delete', obj, "DELETE"
+    )
+  }
 
   const renderContent = (obj) => {
     return (
@@ -87,32 +89,24 @@ const Notes = () => {
       >
         {obj?.content?.startsWith("http") ||
         obj?.content?.trim().endsWith(".com") ? (
-          <a href={obj.content} target="_blank">
+          <a href={obj.content} target="_blank" className={style.link}>
             {obj?.content}
           </a>
         ) : (
           <p>{obj?.content}</p>
         )}
-        <div className={style.imgContainer}>
-          {obj?.imageList?.length > 0 &&
-            obj.imageList.map((ele, idx) => <img src={ele} key={`img${idx}`} />)}
-        </div>
       </div>
     );
   };
 
-  return (
-    <>
-      <div className={style.font}>
-        <BgImg theme={theme} />
-      </div>
-      <div className={style.container}>
+  const renderContainer = () => (
+    <div className={style.container}>
         <img
           src={plusIcon}
           onClick={() => {
             setOpen(true);
             setType("add");
-            setNote({ id: 0, data: "", imageList: [] });
+            setNote({ id: 0, content: ""});
           }}
           className={style.plusIcon}
         />
@@ -123,7 +117,6 @@ const Notes = () => {
             className={style.themeChanger}
           />
         </div>
-        {console.log(noteList)}
         <div className={style.noteListContainer}>
           {noteList.map((obj, index) => (
             <div key={index} className={style.note}>
@@ -150,7 +143,14 @@ const Notes = () => {
           ))}
         </div>
         {open && (
-          <div className={style.modalContainer}>
+          <div className={style.modalContainer}
+          onClickCapture={()=> {
+            if (type === "show") {
+              setOpen(false);
+              setNoteContent({ id: 0, content: "" });
+            }
+          }}
+          >
             <NotesModal
               setOpen={setOpen}
               handleAdd={handleAdd}
@@ -161,8 +161,19 @@ const Notes = () => {
           </div>
         )}
       </div>
-    </>
   );
+  return (
+    <>
+      <div className={style.font}>
+        <BgImg theme={theme} />
+      </div>
+      {isLoading ? (
+        <DefaultLoader/>
+      ) : (
+        renderContainer()
+      )}
+    </>
+  );  
 };
 
 export default Notes;

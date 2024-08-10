@@ -1,0 +1,66 @@
+@import '../../../utils/config.less';
+
+.modalWrapper {
+    background-color: @primaryColorLight;
+    border-radius: 1em;
+    padding: .5em 2em 1em;
+    overflow: scroll;
+
+    textarea {
+        width: 30em;
+        height: 12em;
+        max-width: 100%;
+        background-color: white;
+    }
+    
+    .showmodalContainer {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .contentWrapper {
+            img {
+                max-width: 100%;
+            }
+        }
+    }
+
+    .addorEditContainer {
+
+        .actionContainer {
+            padding-top: 1.3em;
+            display: flex;
+            align-items: center;
+            justify-content: end;
+            gap: .5em;
+
+            button {
+                border: none;
+                color: white;
+                padding: .5em .7em;
+                border-radius: .5em;
+            }
+
+            .cancelBtn {
+                background-color: rgba(255, 0, 0, 0.932);
+            }
+
+            .confirmBtn {
+                background-color: @secondaryColor;
+            }
+        }
+    }
+}
+
+.modalWrapper::-webkit-scrollbar {
+    width: .5em;
+    margin: 1em;
+}
+
+.modalWrapper::-webkit-scrollbar-thumb {
+    background: black;
+    border-radius: 10px;
+    cursor: pointer;
+}

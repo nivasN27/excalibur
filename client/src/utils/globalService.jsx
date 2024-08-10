@@ -2,7 +2,7 @@ import Axios from "axios";
 import { restbaseurl } from "./constant";
 
 class GlobalService {
-  static apiHit = async (callback, url, data = {}, method = "GET") => {
+  static apiInstance = async (callback, url, data = {}, method = "GET") => {
     try {
       const response = await Axios.request({
         baseURL: restbaseurl,
