@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const Products = () => {
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate('/notes')
+    navigate('notes')
   }
   return (
     <>

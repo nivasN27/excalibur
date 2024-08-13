@@ -1,3 +1,4 @@
+import Footer from "../components/Footer";
 import Header from "../components/Header";
 import AboutUs from "../screen/AboutUs";
 import Home from "../screen/Home";
@@ -15,8 +16,9 @@ function App() {
         <Route exact path="/home" element={<Home />} />
         <Route exact path="/products" element={<Products />} />
         <Route exact path="/aboutus" element={<AboutUs />} />
-        <Route exact path="/notes" element={<Notes />} />
+        <Route exact path="/products/notes" element={<Notes />} />
       </Routes>
+      <Footer/>
     </>
   );
 }
