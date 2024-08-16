@@ -16,7 +16,6 @@ const Notes = () => {
   const [noteList, setNoteList] = useState([]);
   const [note, setNote] = useState({ id: 0, content: "" });
   const [type, setType] = useState("add");
-  const [theme, setTheme] = useState("dark");
 
   useEffect(() => {
     handleGetNotes();
@@ -111,11 +110,6 @@ const Notes = () => {
           className={style.plusIcon}
         />
         <div>
-          <img
-            src={theme === "light" ? moon : sun}
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            className={style.themeChanger}
-          />
         </div>
         <div className={style.noteListContainer}>
           {noteList.map((obj, index) => (
@@ -165,7 +159,7 @@ const Notes = () => {
   return (
     <>
       <div className={style.font}>
-        <BgImg theme={theme} />
+        <BgImg/>
       </div>
       {isLoading ? (
         <DefaultLoader/>

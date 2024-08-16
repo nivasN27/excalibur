@@ -1,0 +1,84 @@
+@import '../../utils/config.less';
+
+
+.homeContainer {
+    padding: 3em;
+
+    .intro {
+        width: 80%;
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: @secondaryColor;
+        border: 2px solid @secondaryColorLight;
+        border-radius: 2em;
+
+        .leftContent {
+            color: white;
+            width: 50%;
+
+            h1 {
+                font-size: 3em;
+            }
+
+            .title {
+                display: flex;
+                align-items: center;
+                gap: 1em;
+
+                h1 {
+                    font-size: 4em;
+                    margin-top: 0;
+                }
+
+                .emoji {
+                    width: 4em;
+                }
+            }
+
+            .cvBtnWrapper {
+                display: flex;
+                justify-content: center;
+                margin-top: 2em;
+                .cvBtn {
+                    border-radius: 2em !important;
+                    padding: .5em 1em;
+                    border: 2px solid @primaryColor;
+                    background-color: @secondaryColor;
+                    color: @primaryColor;
+                    cursor: pointer;
+                    font-weight: 400;
+                    transition: background-color .3s ease-in;
+                    &:hover {
+                        background-color: @primaryColor;
+                        color: @secondaryColor;
+                    }
+                }
+            }
+            .iconWrapper{
+                display: flex;
+                justify-content: center;
+                gap:2em;
+                margin-top: 2em;
+                a{
+                    color: white;
+                }
+                .icon{
+                    font-size: 2em;
+                    cursor: pointer;
+                    transition: transform .4s ease;
+                    &:hover{
+                        transform: scale(1.2);
+                    }
+                }
+            }
+        }
+
+        .rightContent {
+            .pic {
+                width: 30em;
+            }
+        }
+    }
+}

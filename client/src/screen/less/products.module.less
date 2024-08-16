@@ -1,26 +1,42 @@
-.container {
+@import '../../utils/config.less'; 
+
+
+.prductContainerWrapper{
     width: 100%;
     display: flex;
-    justify-content: center;
-    .listContainer {
-        width: 55%;
-        cursor: pointer;
-        .coverImg {
-            width: 100%;
+    align-items: center;
+    flex-direction: column;
+    .prductContainer {
+        width: fit-content;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 2em;
+        padding: 2em;
+        background-color: @secondaryColor;
+        border: 2px solid @secondaryColorLight;
+        border-radius: 2em;
+        transition: transform .4s ease;
+        .notesIcon {
+            width: 6em;
         }
-
-        .content {
-            display: flex;
-            gap: 1em;
-            align-items: center;
-
-            .notesIcon {
-                width: 4em;
-            }
-
+        .wordWrapper {
             .name {
-                font-size: 2em;
                 width: max-content;
+                color: white;
+            }
+            .morals {
+                color: white;
+            }
+        }
+        &:hover {
+            transform: scale(1.1);
+            cursor: pointer;
+            .name {
+                color: @primaryColor;
+            }
+            .morals {
+                color: @primaryColor;
             }
         }
     }
