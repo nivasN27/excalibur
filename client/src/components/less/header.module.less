@@ -12,6 +12,10 @@
         border: none;
         padding: 0.3em 1em;
         border-radius: 1em;
+        cursor: pointer;
+        &:hover{
+            box-shadow: 2px 1px 34px  @primaryColorLight;
+        }
     }
     .leftContainer{
         display: flex;
@@ -43,5 +47,19 @@
                 opacity: 1;
             }
         }
+    }
+}
+.showProfileContainer{
+    backdrop-filter: blur(6px);
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    .showProfile{
+        position: fixed;
+        left: 50%;
+        top: 40%;
+        transform: translate(-50%, -50%);
+        background-color: @primaryColor;
+        border-radius: 50%;
     }
 }

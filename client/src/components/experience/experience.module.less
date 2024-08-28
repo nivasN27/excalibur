@@ -1,0 +1,57 @@
+@import '../../utils/config.less';
+
+.experienceContainer{
+    padding-bottom: 5em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    h1{
+        text-align: center;
+        text-decoration: 1.5px dashed underline @primaryColor;
+    }
+    .expMapContainer{
+        position: relative;
+        width: 60%;
+        padding: 2em 0 2em 5em;
+
+        .expWrapper{
+            padding: 1em 0;
+            position: relative;
+
+            h2{
+                text-decoration: underline @primaryColor;
+            }
+
+            h3{    
+                margin: .5em 0;
+                font-style: italic !important;
+            }
+
+            .expDuration{
+                position: absolute;
+                top: 1em;
+                left: -8.5em;  
+                background-color: @secondaryColor;
+                padding: .5em;
+                border: 2px solid @secondaryColorLight;
+                border-radius: 1em;
+                color: @white;
+                font-weight: 600;
+                z-index: 1;
+            }
+        }
+
+
+        .verticalLine{
+            height: 100%;
+            width: 2px;
+            border: 2px solid @primaryColor;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform: translate(-50%);
+        }
+    }
+}

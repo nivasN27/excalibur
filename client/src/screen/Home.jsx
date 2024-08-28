@@ -15,7 +15,7 @@ const Home = () => {
         <div className={style.leftContent}>
           <div className={style.title}>
             <img src={emoji} className={style.emoji} />
-            <h1>Hey, I'm Nivash</h1>
+            <h1>Hey, I'm <span>Nivash</span></h1>
           </div>
           <h1>Frontent Developer.</h1>
           <p>

@@ -1,24 +1,30 @@
 import style from "./less/header.module.less";
-import logo from '../assets/images/app/logo.png';
+import logo from '../assets/images/app/logo.webp';
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Header = () => {
   const navigate = useNavigate();
   const [active, setActive] = useState('Home')
-  const menu = ['Home', 'Products', 'About', 'contact'];
+  const [showProfile, stShowProfile] = useState(false);
+  const menu = ['Home', 'Products', 'About'];
+
+  useEffect(() => {
+    const path = window.location.pathname.split('/').slice(1)[0];
+    if(path.length > 0){
+      setActive(path.charAt(0).toUpperCase() + path.slice(1))
+    }
+  }, [])
+
   const handleClick = (ele) => {
     setActive(ele);
-    navigate(`/${ele.toLowerCase().replace(/\s+/g, '')}`);
-  }
-  const showProfile = () => {
-    <></>
+    navigate(`/${ele.toLowerCase()}`);
   }
   return (
     <>
       <div className={style.container}>
         <div className={style.leftContainer}>
-          <img src={logo} className={style.logo} onClick={() => showProfile()}/>
+          <img src={logo} className={style.logo} onClick={() => stShowProfile(!showProfile)}/>
           <h2 className={style.title}>Nivash Nandhakumar</h2>
         </div>
         <div className={style.menuContainer}>
@@ -33,9 +39,16 @@ const Header = () => {
               </p>
             ))
           }
-        <button className={style.btn}>login</button>
+        <button className={style.btn}>contact me</button>
         </div>
       </div>
+      {
+        showProfile && (
+          <div className={style.showProfileContainer} onClick={() => stShowProfile(!showProfile)}>
+            <img src={logo} className={style.showProfile}/>
+          </div>
+        )
+      }
     </>
   );
 };
