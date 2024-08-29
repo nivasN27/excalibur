@@ -35,14 +35,12 @@ const eduData = [
 const Education = () => {
   return (
     <div className={style.educationContainer}>
-      <h1>Education</h1>
       <div className={style.eduMapContainer}>
         {eduData.map((ele, ind) => (
           <div
             key={`edu${ind}`}
-            className={`${style.eduMapWrapper} ${
-              ele.style === "rightContent" && style.rightContent
-            }`}
+            className={`${style.eduMapWrapper} ${ele.style === "rightContent" && style.rightContent
+              }`}
           >
             <div className={style.eduContent}>
               <p className={style.class}>{ele.class}</p>
@@ -52,7 +50,7 @@ const Education = () => {
             </div>
             <div className={style.eduLogoWrapper}>
               <a href={ele.institutionLink} target='_blank'>
-              <img src={ele.institutionLogo} className={style.eduLogo} />
+                <img src={ele.institutionLogo} className={style.eduLogo} />
               </a>
             </div>
           </div>

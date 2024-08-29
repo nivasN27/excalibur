@@ -1,10 +1,10 @@
 import style from "./less/footer.module.less";
 
-const Footer = () => {
+const Footer = ({ condition = false}) => {
   return (
     <>
-      <div>
-        <p className={style.copyRight}>
+      <div className={style.footer}>
+        <p className={condition ? style.copyRight : style.fixedCopyRight}>
         Copyright © 2024 by Nivash | All Rights Reserved.
         </p>
       </div>  

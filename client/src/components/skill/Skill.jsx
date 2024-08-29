@@ -46,7 +46,6 @@ const skillData = [
 const Skill = () => {
   return (
     <div className={style.SkillContainer}>
-    <h1>Skills</h1>
     <div className={style.SkillWrapper}>
       {
         skillData.map((ele, ind) => (

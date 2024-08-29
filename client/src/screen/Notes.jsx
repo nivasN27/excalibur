@@ -35,10 +35,8 @@ const Notes = () => {
     const obj = { 
       content: note.content
     };
-    console.log(note.content)
     GlobalService.apiInstance(
       (data) => {
-        console.log(data)
         if(data.status && data.message === "success") {
           const updatedObj = {
             ...obj,
@@ -59,7 +57,6 @@ const Notes = () => {
     };
     GlobalService.apiInstance(
       (data) => {
-        console.log(data);
         handleGetNotes()
       }, '/edit', obj, "PUT"
     )
@@ -70,7 +67,6 @@ const Notes = () => {
     };
     GlobalService.apiInstance(
       (data) => {
-        console.log(data);
         handleGetNotes()
       }, '/delete', obj, "DELETE"
     )
