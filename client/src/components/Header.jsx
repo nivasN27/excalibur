@@ -20,6 +20,10 @@ const Header = () => {
     setActive(ele);
     navigate(`/${ele.toLowerCase()}`);
   }
+
+  const handleContact = () => {
+    navigate('contact');
+  }
   return (
     <>
       <div className={style.container}>
@@ -39,7 +43,7 @@ const Header = () => {
               </p>
             ))
           }
-        <button className={style.btn}>contact me</button>
+        <button className={style.btn} onClick={handleContact}>contact me</button>
         </div>
       </div>
       {
