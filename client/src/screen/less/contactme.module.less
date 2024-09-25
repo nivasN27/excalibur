@@ -1,34 +1,34 @@
 @import '../../utils/config.less';
 
-.contactContainer{
+.contactContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 2em;
 
-    .avatar{
+    .avatar {
         width: 10em;
         border-radius: 50%;
     }
 
-    .contactNumber{
+    .contactNumber {
         color: @white;
         font-size: 1.5em;
         text-align: center;
 
-        span{
+        span {
             color: @primaryColor;
             cursor: pointer;
-            transition: font-size .3s ease;
-            
-            &:hover{
+            transition: font-size .1s ease;
+
+            &:hover {
                 text-decoration: underline;
-                font-size: 2em;
+                font-size: 1.3em;
             }
         }
     }
 
-    .feedBackBtn{
+    .feedBackBtn {
         font-size: 1.3em;
         border-radius: 2em !important;
         padding: .5em 1em;
@@ -37,9 +37,73 @@
         color: @primaryColor;
         cursor: pointer;
         transition: background-color .3s ease-in;
+
         &:hover {
             background-color: @primaryColor;
             color: @secondaryColor;
         }
+    }
+}
+
+.feedBackWrapper {
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(6px);
+
+    .feedBackContainer {
+        padding: 2em;
+        background-color: @primaryColorLight;
+        border-radius: .5em;
+
+        .individualInput {
+            width: 25em;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5em;
+
+            input {
+                width: 20em;
+                height: 2em;
+            }
+
+            textarea {
+                width: 20em;
+                height: 5em;
+                max-height: 10em;
+                resize: vertical;
+            }
+        }
+
+        .btnContainer {
+            display: flex;
+            justify-content: end;
+            gap: 1em;
+
+            .formSubmit {
+                background-color: @secondaryColor;
+                color: white;
+                border: 1px solid @primaryColor;
+                border-radius: 1.5em;
+                padding: .3em 1em;
+
+                &:disabled {
+                    opacity: .5;
+                }
+            }
+
+            .cancelBtn {
+                background-color: red;
+                color: white;
+                border: 1px solid @secondaryColor;
+                border-radius: 1.5em;
+                padding: .3em 1em;
+            }
+        }
+
     }
 }
