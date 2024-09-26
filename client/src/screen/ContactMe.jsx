@@ -3,7 +3,7 @@ import avatar from "../assets/images/app/avatar.webp";
 import { useState } from "react";
 
 const ContactMe = () => {
-  const [showFeedback, setShowFeedback] = useState(true);
+  const [showFeedback, setShowFeedback] = useState(false);
 
   const handleSubmit = () => {
     setShowFeedback(!showFeedback)

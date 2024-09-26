@@ -22,6 +22,7 @@ const Header = () => {
   }
 
   const handleContact = () => {
+    handleClick('contact')
     navigate('contact');
   }
   return (
